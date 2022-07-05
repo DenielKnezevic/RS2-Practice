@@ -5,7 +5,9 @@ VisualStudioVersion = 17.1.32319.34
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RS2 Vjezba", "RS2 Vjezba.csproj", "{813786AF-0786-433B-9DDB-270E3E8E0CF6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RS2 Vjezba.Services", "..\RS2 Vjezba.Services\RS2 Vjezba.Services.csproj", "{71009592-0430-4635-AA99-AF3D8CC588ED}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RS2 Vjezba.Services", "..\RS2 Vjezba.Services\RS2 Vjezba.Services.csproj", "{71009592-0430-4635-AA99-AF3D8CC588ED}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RS2 Vjezbe.Models", "..\RS2 Vjezbe.Models\RS2 Vjezbe.Models.csproj", "{BB80B5C2-46E8-40E9-AB05-3D8B1B9DC03D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{71009592-0430-4635-AA99-AF3D8CC588ED}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{71009592-0430-4635-AA99-AF3D8CC588ED}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{71009592-0430-4635-AA99-AF3D8CC588ED}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BB80B5C2-46E8-40E9-AB05-3D8B1B9DC03D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BB80B5C2-46E8-40E9-AB05-3D8B1B9DC03D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BB80B5C2-46E8-40E9-AB05-3D8B1B9DC03D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BB80B5C2-46E8-40E9-AB05-3D8B1B9DC03D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
