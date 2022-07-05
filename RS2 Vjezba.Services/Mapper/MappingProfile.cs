@@ -13,6 +13,7 @@ namespace RS2_Vjezba.Services.Mapper
         {
             CreateMap<Database.Korisnici, RS2_Vjezbe.Models.Korisnici>();
             CreateMap<Database.Proizvodi , RS2_Vjezbe.Models.Proizvodi>(); 
+            CreateMap<Database.JediniceMjere , RS2_Vjezbe.Models.JediniceMjere>();
         }
     }
 }

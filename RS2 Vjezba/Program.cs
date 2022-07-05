@@ -15,6 +15,7 @@ builder.Services.AddAutoMapper(typeof(IKorisnikService));
 builder.Services.AddDbContext<eProdajaContext>(o => o.UseSqlServer(builder.Configuration.GetConnectionString("SqlServer")));
 builder.Services.AddTransient<IKorisnikService, KorisnikService>();
 builder.Services.AddTransient<IProizvodiService, ProizvodiService>();
+builder.Services.AddTransient<IJediniceMjereService, JediniceMjereService>();  
 
 var app = builder.Build();
 
