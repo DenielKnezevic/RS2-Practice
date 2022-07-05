@@ -12,6 +12,7 @@ namespace RS2_Vjezba.Services.Mapper
         public MappingProfile()
         {
             CreateMap<Database.Korisnici, RS2_Vjezbe.Models.Korisnici>();
+            CreateMap<Database.Proizvodi , RS2_Vjezbe.Models.Proizvodi>(); 
         }
     }
 }
