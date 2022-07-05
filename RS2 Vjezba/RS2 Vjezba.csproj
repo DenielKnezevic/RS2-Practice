@@ -21,7 +21,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\RS2 Vjezba.Services\RS2 Vjezba.Services.csproj" />
-    <ProjectReference Include="..\RS2 Vjezbe.Models\RS2 Vjezbe.Models.csproj" />
+    <ProjectReference Include="..\RS2 Vjezbe.Models\RS2 Vjezba.Models.csproj" />
   </ItemGroup>
 
 </Project>

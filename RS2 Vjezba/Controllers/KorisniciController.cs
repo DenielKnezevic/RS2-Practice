@@ -17,13 +17,13 @@ namespace RS2_Vjezba.Controllers
         }
 
         [HttpGet]
-        public IEnumerable<Korisnici> Get()
+        public IEnumerable<RS2_Vjezbe.Models.Korisnici> Get()
         {
             return this._service.Get();
         }
 
         [HttpGet("{id}")]
-        public Korisnici GetById(int id)
+        public RS2_Vjezbe.Models.Korisnici GetById(int id)
         {
             return this._service.GetById(id);
         }

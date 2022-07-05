@@ -1,4 +1,5 @@
-﻿using RS2_Vjezba.Services.Database;
+﻿using AutoMapper;
+using RS2_Vjezba.Services.Database;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,20 +11,22 @@ namespace RS2_Vjezba.Services.Services
     public class KorisnikService : IKorisnikService
     {
         private readonly eProdajaContext Context;
+        private IMapper _mapper;
 
-        public KorisnikService(eProdajaContext context)
+        public KorisnikService(eProdajaContext context , IMapper mapper)
         {
             Context = context;
+            _mapper = mapper;
         }
 
-        public IEnumerable<Korisnici> Get()
+        public IEnumerable<RS2_Vjezbe.Models.Korisnici> Get()
         {
-            return Context.Korisnicis.ToList();
+            return _mapper.Map<IEnumerable<RS2_Vjezbe.Models.Korisnici>>(Context.Korisnicis.ToList());
         }
 
-        public Korisnici GetById(int id)
+        public RS2_Vjezbe.Models.Korisnici GetById(int id)
         {
-            var model = Context.Korisnicis.FirstOrDefault(x => x.KorisnikId == id);
+            var model = _mapper.Map<RS2_Vjezbe.Models.Korisnici>(Context.Korisnicis.FirstOrDefault(x => x.KorisnikId == id));
 
             return model;
         }
