@@ -5,28 +5,11 @@ using RS2_Vjezba.Services.Services;
 
 namespace RS2_Vjezba.Controllers
 {
-    [Route("api/[controller]")]
-    [ApiController]
-    public class KorisniciController : ControllerBase
+    public class KorisniciController : BaseController<RS2_Vjezbe.Models.Korisnici>
     {
-        private IKorisnikService _service;
-
         public KorisniciController(IKorisnikService service)
+            : base(service)
         {
-            _service = service; 
         }
-
-        [HttpGet]
-        public IEnumerable<RS2_Vjezbe.Models.Korisnici> Get()
-        {
-            return this._service.Get();
-        }
-
-        [HttpGet("{id}")]
-        public RS2_Vjezbe.Models.Korisnici GetById(int id)
-        {
-            return this._service.GetById(id);
-        }
-
     }
 }

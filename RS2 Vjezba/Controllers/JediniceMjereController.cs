@@ -5,27 +5,11 @@ using RS2_Vjezba.Services.Services;
 
 namespace RS2_Vjezba.Controllers
 {
-    [Route("api/[controller]")]
-    [ApiController]
-    public class JediniceMjereController : ControllerBase
+    public class JediniceMjereController : BaseController<RS2_Vjezbe.Models.JediniceMjere>
     {
-        private IJediniceMjereService _service;
-
         public JediniceMjereController(IJediniceMjereService service)
+            :base(service)
         {
-            _service = service; 
-        }
-
-        [HttpGet]
-        public IEnumerable<RS2_Vjezbe.Models.JediniceMjere> Get()
-        {
-            return this._service.Get();
-        }
-
-        [HttpGet("{id}")]
-        public RS2_Vjezbe.Models.JediniceMjere GetById(int id)
-        {
-            return this._service.GetById(id);
         }
 
     }
