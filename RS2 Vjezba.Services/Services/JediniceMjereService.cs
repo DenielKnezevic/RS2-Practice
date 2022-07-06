@@ -8,27 +8,13 @@ using System.Threading.Tasks;
 
 namespace RS2_Vjezba.Services.Services
 {
-    public class JediniceMjereService : IJediniceMjereService
+    public class JediniceMjereService : BaseService<RS2_Vjezbe.Models.JediniceMjere , Database.JediniceMjere> , IJediniceMjereService
     {
-        private readonly eProdajaContext Context;
-        private IMapper _mapper;
-
-        public JediniceMjereService(eProdajaContext context , IMapper mapper)
+        public JediniceMjereService(eProdajaContext context, IMapper mapper)
+            : base(context, mapper)
         {
-            Context = context;
-            _mapper = mapper;
         }
 
-        public IEnumerable<RS2_Vjezbe.Models.JediniceMjere> Get()
-        {
-            return _mapper.Map<IEnumerable<RS2_Vjezbe.Models.JediniceMjere>>(Context.JediniceMjeres.ToList());
-        }
 
-        public RS2_Vjezbe.Models.JediniceMjere GetById(int id)
-        {
-            var model = _mapper.Map<RS2_Vjezbe.Models.JediniceMjere>(Context.JediniceMjeres.FirstOrDefault(x => x.JedinicaMjereId == id));
-
-            return model;
-        }
     }
 }

@@ -8,9 +8,7 @@ using System.Threading.Tasks;
 
 namespace RS2_Vjezba.Services.Services
 {
-    public interface IKorisnikService
+    public interface IKorisnikService : IService<RS2_Vjezbe.Models.Korisnici>
     {
-        IEnumerable<RS2_Vjezbe.Models.Korisnici> Get();
-        RS2_Vjezbe.Models.Korisnici GetById(int id);
     }
 }
