@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace RS2_Vjezba.Services.Services
 {
-    public class BaseService<T, TDb> : IService<T> where T : class where TDb : class
+    public class BaseService<T, TDb , TSearch> : IService<T , TSearch> where T : class where TDb : class where TSearch : class
     {
         private readonly eProdajaContext Context;
         private IMapper _mapper;
@@ -19,11 +19,18 @@ namespace RS2_Vjezba.Services.Services
             _mapper = mapper;
         }
 
-        public IEnumerable<T> Get()
+        public virtual IEnumerable<T> Get(TSearch search = null)
         {
-            var entity = Context.Set<TDb>().ToList();
+            var entity = Context.Set<TDb>().ToList().AsQueryable() ;
+
+            entity = AddFilter(entity, search);
 
             return _mapper.Map<IEnumerable<T>>(entity);
+        }
+
+        public virtual IQueryable<TDb> AddFilter(IQueryable<TDb> query , TSearch search = null)
+        {
+            return query;
         }
 
         public T GetById(int id)

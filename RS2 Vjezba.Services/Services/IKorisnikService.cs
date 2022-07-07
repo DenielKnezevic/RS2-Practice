@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace RS2_Vjezba.Services.Services
 {
-    public interface IKorisnikService : IService<RS2_Vjezbe.Models.Korisnici>
+    public interface IKorisnikService : IService<RS2_Vjezbe.Models.Korisnici , RS2_Vjezbe.Models.KorisniciSearchObject>
     {
     }
 }

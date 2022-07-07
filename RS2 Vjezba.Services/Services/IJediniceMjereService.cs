@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace RS2_Vjezba.Services.Services
 {
-    public interface IJediniceMjereService : IService<RS2_Vjezbe.Models.JediniceMjere>
+    public interface IJediniceMjereService : IService<RS2_Vjezbe.Models.JediniceMjere , RS2_Vjezbe.Models.JediniceMjereSearchObject>
     {
     }
 }

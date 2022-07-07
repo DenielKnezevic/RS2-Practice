@@ -6,19 +6,19 @@ namespace RS2_Vjezba.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class BaseController<T> : ControllerBase where T : class
+    public class BaseController<T , TSearch> : ControllerBase where T : class where TSearch : class
     {
-        private readonly IService<T> _service;
+        private readonly IService<T , TSearch> _service;
 
-        public BaseController(IService<T> service)
+        public BaseController(IService<T , TSearch> service)
         {
             _service = service;
         }
 
         [HttpGet]
-        public IEnumerable<T> Get()
+        public IEnumerable<T> Get([FromQuery]TSearch search = null)
         {
-            return this._service.Get();
+            return this._service.Get(search);
         }
 
         [HttpGet("{id}")]

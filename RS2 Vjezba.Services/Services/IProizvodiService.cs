@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace RS2_Vjezba.Services.Services
 {
-    public interface IProizvodiService : IService<RS2_Vjezbe.Models.Proizvodi>
+    public interface IProizvodiService : IService<RS2_Vjezbe.Models.Proizvodi, RS2_Vjezbe.Models.ProizvodiSearchObject>
     {
     }
 }
