@@ -11,8 +11,8 @@ namespace RS2_Vjezba.Services.Services
 {
     public class BaseService<T, TDb , TSearch> : IService<T , TSearch> where T : class where TDb : class where TSearch : BaseSearchObject
     {
-        private readonly eProdajaContext Context;
-        private IMapper _mapper;
+        public eProdajaContext Context;
+        public IMapper _mapper;
 
         public BaseService(eProdajaContext context , IMapper mapper)
         {

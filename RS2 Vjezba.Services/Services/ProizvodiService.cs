@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using RS2_Vjezba.Services.Database;
 using RS2_Vjezbe.Models;
+using RS2_Vjezbe.Models.Requests;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace RS2_Vjezba.Services.Services
 {
-    public class ProizvodiService : BaseService<RS2_Vjezbe.Models.Proizvodi,Database.Proizvodi , RS2_Vjezbe.Models.ProizvodiSearchObject>, IProizvodiService
+    public class ProizvodiService : CRUDService<RS2_Vjezbe.Models.Proizvodi,Database.Proizvodi , RS2_Vjezbe.Models.ProizvodiSearchObject , ProizvodiInsertRequest , ProizvodiUpdateRequest>, IProizvodiService
     {
         public ProizvodiService(eProdajaContext context, IMapper mapper)
             : base(context, mapper)

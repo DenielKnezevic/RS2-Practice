@@ -8,7 +8,7 @@ namespace RS2_Vjezba.Controllers
     [ApiController]
     public class BaseController<T , TSearch> : ControllerBase where T : class where TSearch : class
     {
-        private readonly IService<T , TSearch> _service;
+        public IService<T , TSearch> _service;
 
         public BaseController(IService<T , TSearch> service)
         {

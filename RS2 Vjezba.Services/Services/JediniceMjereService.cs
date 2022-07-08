@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using RS2_Vjezba.Services.Database;
 using RS2_Vjezbe.Models;
+using RS2_Vjezbe.Models.Requests;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace RS2_Vjezba.Services.Services
 {
-    public class JediniceMjereService : BaseService<RS2_Vjezbe.Models.JediniceMjere , Database.JediniceMjere, RS2_Vjezbe.Models.JediniceMjereSearchObject> , IJediniceMjereService
+    public class JediniceMjereService : CRUDService<RS2_Vjezbe.Models.JediniceMjere , Database.JediniceMjere, RS2_Vjezbe.Models.JediniceMjereSearchObject , JediniceMjereUpsertRequest, JediniceMjereUpsertRequest> , IJediniceMjereService
     {
         public JediniceMjereService(eProdajaContext context, IMapper mapper)
             : base(context, mapper)
