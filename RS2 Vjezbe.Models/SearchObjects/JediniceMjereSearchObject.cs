@@ -4,7 +4,7 @@ using System.Text;
 
 namespace RS2_Vjezbe.Models
 {
-    public class JediniceMjereSearchObject
+    public class JediniceMjereSearchObject : BaseSearchObject
     {
         public string Naziv { get; set; }
     }

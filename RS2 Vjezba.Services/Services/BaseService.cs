@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using RS2_Vjezba.Services.Database;
+using RS2_Vjezbe.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace RS2_Vjezba.Services.Services
 {
-    public class BaseService<T, TDb , TSearch> : IService<T , TSearch> where T : class where TDb : class where TSearch : class
+    public class BaseService<T, TDb , TSearch> : IService<T , TSearch> where T : class where TDb : class where TSearch : BaseSearchObject
     {
         private readonly eProdajaContext Context;
         private IMapper _mapper;
@@ -24,6 +25,11 @@ namespace RS2_Vjezba.Services.Services
             var entity = Context.Set<TDb>().ToList().AsQueryable() ;
 
             entity = AddFilter(entity, search);
+
+            if(search.Page.HasValue == true && search.Pagesize.HasValue == true)
+            {
+                entity = entity.Take(search.Pagesize.Value).Skip(search.Page.Value * search.Pagesize.Value); 
+            }
 
             return _mapper.Map<IEnumerable<T>>(entity);
         }
