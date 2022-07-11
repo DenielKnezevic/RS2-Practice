@@ -19,7 +19,7 @@ namespace RS2_Vjezba.Services.Services
 
         }
 
-        public T Insert(TInsert insert)
+        public virtual T Insert(TInsert insert)
         {
             var set = Context.Set<TDb>();
 
@@ -27,12 +27,14 @@ namespace RS2_Vjezba.Services.Services
 
             set.Add(entity);
 
+            BeforeInsert(insert, entity);
+
             Context.SaveChanges();
 
             return _mapper.Map<T>(entity);
         }
 
-        public T Update(int id , TUpdate update)
+        public virtual T Update(int id , TUpdate update)
         {
             var set = Context.Set<TDb>();
 
@@ -43,6 +45,11 @@ namespace RS2_Vjezba.Services.Services
             Context.SaveChanges();
 
             return _mapper.Map<T>(entity);
+        }
+
+        public virtual void BeforeInsert(TInsert insert , TDb entity)
+        {
+
         }
     }
 }

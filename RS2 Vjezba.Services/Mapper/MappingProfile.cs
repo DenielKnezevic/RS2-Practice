@@ -21,6 +21,10 @@ namespace RS2_Vjezba.Services.Mapper
             CreateMap<Database.Proizvodi , ProizvodiInsertRequest>();
             CreateMap<ProizvodiUpdateRequest, Database.Proizvodi>();
             CreateMap<Database.Proizvodi, ProizvodiUpdateRequest>();
+            CreateMap<KorisniciInsertRequest, Database.Korisnici>();
+            CreateMap<Database.Korisnici, KorisniciInsertRequest>();
+            CreateMap<KorisniciUpdateRequest, Database.Korisnici>();
+            CreateMap<Database.Korisnici, KorisniciUpdateRequest>();
 
             CreateMap<JediniceMjereUpsertRequest, Database.JediniceMjere>();
             CreateMap<Database.JediniceMjere, JediniceMjereUpsertRequest>();
