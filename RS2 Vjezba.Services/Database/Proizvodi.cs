@@ -22,6 +22,7 @@ namespace RS2_Vjezba.Services.Database
         public byte[]? Slika { get; set; }
         public byte[]? SlikaThumb { get; set; }
         public bool? Status { get; set; }
+        public string StateMachine { get; set; }
 
         public virtual JediniceMjere JedinicaMjere { get; set; } = null!;
         public virtual VrsteProizvodum Vrsta { get; set; } = null!;
