@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using RS2_Vjezba.Services.Database;
+using RS2_Vjezba.Services.ProductStateMachine;
 using RS2_Vjezba.Services.Services;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -17,6 +18,12 @@ builder.Services.AddTransient<IKorisnikService, KorisnikService>();
 builder.Services.AddTransient<IProizvodiService, ProizvodiService>();
 builder.Services.AddTransient<IJediniceMjereService, JediniceMjereService>();
 builder.Services.AddTransient<IVrsteProizvodumService, VrsteProizvodumService>();
+
+builder.Services.AddTransient<BaseState>();
+builder.Services.AddTransient<ActiveState>();
+builder.Services.AddTransient<DraftState>();
+builder.Services.AddTransient<HiddenState>();
+builder.Services.AddTransient<InitialState>();
 
 var app = builder.Build();
 

@@ -1,4 +1,6 @@
-﻿using RS2_Vjezba.Services.Database;
+﻿using AutoMapper;
+using Microsoft.Extensions.DependencyInjection;
+using RS2_Vjezba.Services.Database;
 using RS2_Vjezbe.Models.Requests;
 using System;
 using System.Collections.Generic;
@@ -8,17 +10,26 @@ using System.Threading.Tasks;
 
 namespace RS2_Vjezba.Services.ProductStateMachine
 {
-    public abstract class BaseState
+    public class BaseState
     {
         public eProdajaContext Context { get; set; }
         public Database.Proizvodi CurrentEntity { get; set; }
+        public IMapper Mapper { get; set; }
+        public IServiceProvider ServiceProvider { get; set; }
 
-        public virtual void Update(int id, ProizvodiUpdateRequest request)
+        public BaseState(IServiceProvider serviceProvider , eProdajaContext context , IMapper mapper)
+        {
+            ServiceProvider = serviceProvider;
+            Context = context;
+            Mapper = mapper;
+        }
+
+        public virtual RS2_Vjezbe.Models.Proizvodi Update(ProizvodiUpdateRequest request)
         {
             throw new Exception("Not allowed");
         }
 
-        public virtual void Insert(ProizvodiInsertRequest request)
+        public virtual RS2_Vjezbe.Models.Proizvodi Insert(ProizvodiInsertRequest request)
         {
             throw new Exception("Not allowed");
         }
@@ -38,25 +49,31 @@ namespace RS2_Vjezba.Services.ProductStateMachine
             throw new Exception("Not allowed");
         }
 
-        public static BaseState CreateState(string state)
+        public BaseState CreateState(string state)
         {
             switch(state)
             {
-                case "initial":
-                    return new InitialState();
+                case "Initial":
+                    return ServiceProvider.GetService<InitialState>();
                     break;
-                case "active":
-                    return new ActiveState();
+                case "Active":
+                    return ServiceProvider.GetService<ActiveState>();
                     break;
-                case "draft":
-                    return new DraftState();
+                case "Draft":
+                    return ServiceProvider.GetService<DraftState>();
                     break;
-                case "hidden":
-                    return new HiddenState();
-                default: throw new Exception("Not specified");
+                case "Hidden":
+                    return ServiceProvider.GetService<HiddenState>();
+                default: 
+                    throw new Exception("Not specified");
                     break;
                     
             }
+        }
+
+        public virtual List<string> AllowedActions()
+        {
+            return new List<string>();
         }
     }
 }

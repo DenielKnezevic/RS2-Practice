@@ -11,5 +11,9 @@ namespace RS2_Vjezba.Services.Services
 {
     public interface IProizvodiService : ICRUDService<RS2_Vjezbe.Models.Proizvodi, RS2_Vjezbe.Models.ProizvodiSearchObject , ProizvodiInsertRequest , ProizvodiUpdateRequest>
     {
+        RS2_Vjezbe.Models.Proizvodi Activate(int id);
+        RS2_Vjezbe.Models.Proizvodi Hide(int id);
+        void Delete(int id);
+        List<string> AllowedActions(int id);
     }
 }
