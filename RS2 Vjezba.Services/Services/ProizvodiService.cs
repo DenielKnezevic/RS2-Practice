@@ -22,7 +22,7 @@ namespace RS2_Vjezba.Services.Services
 
         public override RS2_Vjezbe.Models.Proizvodi Insert(ProizvodiInsertRequest insert)
         {
-            var state = BaseState.CreateState("initial");
+            var state = BaseState.CreateState("Initial");
 
             return state.Insert(insert);
         }

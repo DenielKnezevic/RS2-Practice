@@ -45,10 +45,10 @@ namespace RS2_Vjezba.Services.Services
                 query = query.Where(x => x.Ime.Contains(search.Ime));
             }
 
-            if (!string.IsNullOrEmpty(search.Prezime))
+            if (!string.IsNullOrEmpty(search.Username))
             {
 
-                query = query.Where(x => x.Prezime.Contains(search.Prezime));
+                query = query.Where(x => x.Prezime.Contains(search.Username));
             }
 
             return query;

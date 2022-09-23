@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Flurl.Http;
 using RS2_Vjezbe.Models;
+using RS2_Vjezbe.Models.Requests;
 
 namespace RS2_Vjezba.WinUI
 {
@@ -36,7 +37,19 @@ namespace RS2_Vjezba.WinUI
 
         private async void btnPost_Click(object sender, EventArgs e)
         {
-            var product = await service.Post<Proizvodi>(new Proizvodi());
+            ProizvodiInsertRequest proizvod = new ProizvodiInsertRequest
+            {
+                Naziv = "WinUI Post",
+                VrstaId = 1,
+                JedinicaMjereId = 1,
+                Sifra = "WinUI Post",
+                Slika = null,
+                SlikaThumb = null,
+                Status = true,
+                Cijena = 0
+            };
+
+            var product = await service.Post<Proizvodi>(proizvod);
 
             dataGridView1.DataSource=product;
         }

@@ -6,7 +6,7 @@ namespace RS2_Vjezbe.Models
 {
     public class KorisniciSearchObject : BaseSearchObject
     {
+        public string Username { get; set; }
         public string Ime { get; set; }
-        public string Prezime { get; set; }
     }
 }

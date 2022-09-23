@@ -1,10 +1,10 @@
 ﻿using Flurl.Http;
-using RS2_Vjezbe.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using RS2_Vjezbe.Models;
 
 namespace RS2_Vjezba.WinUI
 {
@@ -18,9 +18,16 @@ namespace RS2_Vjezba.WinUI
             Resource = resource;
         }
 
-        public async Task<T> GetData<T>()
+        public async Task<T> GetData<T>(object search = null)
         {
-            var list = await $"{Endpoint}{Resource}".GetJsonAsync<T>();
+            var query = "";
+
+            if(search != null)
+            {
+                query = await search.ToQueryString(); 
+            }
+
+            var list = await $"{Endpoint}{Resource}?{query}".GetJsonAsync<T>();
 
             return list;
         }
