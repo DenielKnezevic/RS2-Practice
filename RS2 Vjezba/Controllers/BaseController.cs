@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using RS2_Vjezba.Services.Services;
 
@@ -6,6 +7,7 @@ namespace RS2_Vjezba.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class BaseController<T , TSearch> : ControllerBase where T : class where TSearch : class
     {
         public IService<T , TSearch> _service;

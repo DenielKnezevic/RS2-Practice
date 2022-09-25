@@ -81,6 +81,7 @@
             this.Controls.Add(this.dgvKorisnici);
             this.Name = "frmKorisnici";
             this.Text = "frmKorisnici";
+            this.Load += new System.EventHandler(this.frmKorisnici_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvKorisnici)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

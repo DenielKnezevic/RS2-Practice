@@ -36,5 +36,10 @@ namespace RS2_Vjezba.WinUI
 
             dgvKorisnici.DataSource = list;
         }
+
+        private void frmKorisnici_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

@@ -11,5 +11,6 @@ namespace RS2_Vjezba.Services.Services
 {
     public interface IKorisnikService : ICRUDService<RS2_Vjezbe.Models.Korisnici , RS2_Vjezbe.Models.KorisniciSearchObject , KorisniciInsertRequest , KorisniciUpdateRequest>
     {
+        RS2_Vjezbe.Models.Korisnici Login(string username , string password);
     }
 }

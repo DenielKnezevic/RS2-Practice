@@ -16,6 +16,8 @@ namespace RS2_Vjezba.Services.Mapper
             CreateMap<Database.Proizvodi , RS2_Vjezbe.Models.Proizvodi>(); 
             CreateMap<Database.JediniceMjere , RS2_Vjezbe.Models.JediniceMjere>();
             CreateMap<Database.VrsteProizvodum, RS2_Vjezbe.Models.VrsteProizvodum>();
+            CreateMap<Database.Uloge, RS2_Vjezbe.Models.Uloge>();
+            CreateMap<Database.KorisniciUloge, RS2_Vjezbe.Models.KorisniciUloge>();
 
             CreateMap<ProizvodiInsertRequest , Database.Proizvodi>();
             CreateMap<Database.Proizvodi , ProizvodiInsertRequest>();

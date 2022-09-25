@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Security.Cryptography;
+using Microsoft.EntityFrameworkCore;
 
 namespace RS2_Vjezba.Services.Services
 {
@@ -61,6 +62,19 @@ namespace RS2_Vjezba.Services.Services
             entity.LozinkaHash = hash;
             entity.LozinkaSalt = salt;
             base.BeforeInsert(insert, entity);
+        }
+
+        public RS2_Vjezbe.Models.Korisnici Login(string username , string password)
+        {
+            var user = Context.Korisnicis.Include("KorisniciUloges.Uloga").FirstOrDefault(x => x.KorisnickoIme == username);
+
+            if (user == null) { return null; }
+
+            var hash = GenerateHash(user.LozinkaSalt, password);
+
+            if(user.LozinkaHash != hash) { return null; }
+
+            return _mapper.Map<RS2_Vjezbe.Models.Korisnici>(user);
         }
 
         public static string GenerateSalt()

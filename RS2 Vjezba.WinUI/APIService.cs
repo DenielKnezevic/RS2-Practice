@@ -10,6 +10,8 @@ namespace RS2_Vjezba.WinUI
 {
     public class APIService
     {
+        public static string Username = null;
+        public static string Password = null;
         public string Endpoint = "http://localhost:46268/api/";
         public string Resource;
 
@@ -27,7 +29,7 @@ namespace RS2_Vjezba.WinUI
                 query = await search.ToQueryString(); 
             }
 
-            var list = await $"{Endpoint}{Resource}?{query}".GetJsonAsync<T>();
+            var list = await $"{Endpoint}{Resource}?{query}".WithBasicAuth(Username,Password).GetJsonAsync<T>();
 
             return list;
         }
