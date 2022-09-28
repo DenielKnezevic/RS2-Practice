@@ -8,5 +8,6 @@ namespace RS2_Vjezbe.Models
     {
         public string Username { get; set; }
         public string Ime { get; set; }
+        public bool IncludeRoles { get; set; }
     }
 }

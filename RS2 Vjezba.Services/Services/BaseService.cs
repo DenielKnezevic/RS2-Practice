@@ -22,11 +22,13 @@ namespace RS2_Vjezba.Services.Services
 
         public virtual IEnumerable<T> Get(TSearch search = null)
         {
-            var entity = Context.Set<TDb>().ToList().AsQueryable() ;
+            var entity = Context.Set<TDb>().ToList().AsQueryable();
 
             entity = AddFilter(entity, search);
 
-            if(search.Page.HasValue == true && search.Pagesize.HasValue == true)
+            entity = AddInclude(ref entity, search);
+
+            if (search.Page.HasValue == true && search.Pagesize.HasValue == true)
             {
                 entity = entity.Take(search.Pagesize.Value).Skip(search.Page.Value * search.Pagesize.Value); 
             }
@@ -35,6 +37,11 @@ namespace RS2_Vjezba.Services.Services
         }
 
         public virtual IQueryable<TDb> AddFilter(IQueryable<TDb> query , TSearch search = null)
+        {
+            return query;
+        }
+
+        public virtual IQueryable<TDb> AddInclude(ref IQueryable<TDb> query, TSearch search = null)
         {
             return query;
         }

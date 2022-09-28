@@ -55,6 +55,16 @@ namespace RS2_Vjezba.Services.Services
             return query;
         }
 
+        public override IQueryable<Database.Korisnici> AddInclude(ref IQueryable<Database.Korisnici> query, KorisniciSearchObject search = null)
+        {
+            if (search?.IncludeRoles == true)
+            {
+                query = query.Include("KorisniciUloges.Uloga");
+            }
+            return query;
+        }
+
+
         public override void BeforeInsert(KorisniciInsertRequest insert, Database.Korisnici entity)
         {
             var salt = GenerateSalt();

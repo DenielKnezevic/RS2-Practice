@@ -16,6 +16,7 @@ namespace RS2_Vjezba.WinUI
         public frmKorisnici()
         {
             InitializeComponent();
+            dgvKorisnici.AutoGenerateColumns = false;
         }
 
         public APIService service = new APIService("Korisnici");
@@ -31,6 +32,7 @@ namespace RS2_Vjezba.WinUI
 
             search.Ime = txtIme.Text;
             search.Username = txtUsername.Text;
+            search.IncludeRoles = true;
 
             var list = await service.GetData<List<Korisnici>>(search);
 
