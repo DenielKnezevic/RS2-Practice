@@ -43,16 +43,48 @@ namespace RS2_Vjezba.WinUI
 
         public async Task<T> Post<T>(object entity)
         {
-            var product = await $"{Endpoint}{Resource}".PostJsonAsync(entity).ReceiveJson<T>();
+            try
+            {
+                var product = await $"{Endpoint}{Resource}".WithBasicAuth(Username, Password).PostJsonAsync(entity).ReceiveJson<T>();
 
-            return product;
+                return product;
+            }
+            catch (FlurlHttpException ex)
+            {
+                var errors = await ex.GetResponseJsonAsync<Dictionary<string, string[]>>();
+
+                var stringBuilder = new StringBuilder();
+                foreach (var error in errors)
+                {
+                    stringBuilder.AppendLine($"{error.Key}, ${string.Join(",", error.Value)}");
+                }
+
+                MessageBox.Show(stringBuilder.ToString(), "Greška", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return default(T);
+            }
         }
 
         public async Task<T> Put<T>(object id, object entity)
         {
-            var product = await $"{Endpoint}{Resource}/{id}".PutJsonAsync(entity).ReceiveJson<T>();
+            try
+            {
+                var product = await $"{Endpoint}{Resource}/{id}".WithBasicAuth(Username, Password).PutJsonAsync(entity).ReceiveJson<T>();
 
-            return product;
+                return product;
+            }
+            catch (FlurlHttpException ex)
+            {
+                var errors = await ex.GetResponseJsonAsync<Dictionary<string, string[]>>();
+
+                var stringBuilder = new StringBuilder();
+                foreach (var error in errors)
+                {
+                    stringBuilder.AppendLine($"{error.Key}, ${string.Join(",", error.Value)}");
+                }
+
+                MessageBox.Show(stringBuilder.ToString(), "Greška", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return default(T);
+            }
         }
     }
 }

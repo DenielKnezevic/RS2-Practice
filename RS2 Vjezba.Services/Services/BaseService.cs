@@ -22,11 +22,11 @@ namespace RS2_Vjezba.Services.Services
 
         public virtual IEnumerable<T> Get(TSearch search = null)
         {
-            var entity = Context.Set<TDb>().ToList().AsQueryable();
+            var entity = Context.Set<TDb>().AsQueryable();
 
             entity = AddFilter(entity, search);
 
-            entity = AddInclude(ref entity, search);
+            entity = AddInclude(entity, search);
 
             if (search.Page.HasValue == true && search.Pagesize.HasValue == true)
             {
@@ -41,7 +41,7 @@ namespace RS2_Vjezba.Services.Services
             return query;
         }
 
-        public virtual IQueryable<TDb> AddInclude(ref IQueryable<TDb> query, TSearch search = null)
+        public virtual IQueryable<TDb> AddInclude(IQueryable<TDb> query, TSearch search = null)
         {
             return query;
         }

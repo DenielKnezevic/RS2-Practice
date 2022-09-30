@@ -23,7 +23,10 @@ namespace RS2_Vjezba.WinUI
 
         private void dgvKorisnici_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
+            var user = dgvKorisnici.SelectedRows[0].DataBoundItem as Korisnici;
 
+            frmKorisniciUnos frmKorisniciUnos = new frmKorisniciUnos(user);
+            frmKorisniciUnos.ShowDialog();
         }
 
         private async void btnShow_Click(object sender, EventArgs e)

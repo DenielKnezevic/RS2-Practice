@@ -27,7 +27,7 @@ namespace RS2_Vjezba.WinUI
             {
                var result = await service.GetData<dynamic>();
                
-               frmKorisnici form = new frmKorisnici();
+               mdiMain form = new mdiMain();
 
                form.Show();
                 
@@ -36,6 +36,18 @@ namespace RS2_Vjezba.WinUI
             {
                 MessageBox.Show("Wrong username or password");
             }
+        }
+
+        private void frmLogin_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+                button1.PerformClick();
+        }
+
+        private void txtPassword_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+                button1.PerformClick();
         }
     }
 }

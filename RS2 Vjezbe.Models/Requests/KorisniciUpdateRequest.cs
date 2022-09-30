@@ -12,5 +12,6 @@ namespace RS2_Vjezbe.Models.Requests
         public string Telefon { get; set; }
         public string Password { get; set; }
         public bool? Status { get; set; }
+        public string PasswordConfirmation { get; set; }
     }
 }

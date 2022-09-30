@@ -22,6 +22,9 @@ namespace RS2_Vjezba.Services.Services
 
         public override RS2_Vjezbe.Models.Korisnici Insert(KorisniciInsertRequest insert)
         {
+            if (insert.Password != insert.PasswordConfirmation)
+                throw new UserException("Password and confirmation are not equal");
+
             var entity = base.Insert(insert);
 
             foreach (var uloga in insert.UlogeID)
@@ -55,12 +58,13 @@ namespace RS2_Vjezba.Services.Services
             return query;
         }
 
-        public override IQueryable<Database.Korisnici> AddInclude(ref IQueryable<Database.Korisnici> query, KorisniciSearchObject search = null)
+        public override IQueryable<Database.Korisnici> AddInclude(IQueryable<Database.Korisnici> query, KorisniciSearchObject search = null)
         {
             if (search?.IncludeRoles == true)
             {
                 query = query.Include("KorisniciUloges.Uloga");
             }
+
             return query;
         }
 
