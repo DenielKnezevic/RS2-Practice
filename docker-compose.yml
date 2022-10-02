@@ -16,7 +16,7 @@ services:
         restart: unless-stopped
         build: .
         environment:
-            - ConnectionStrings:DefaultConnection=Server=vjezba-sql,1433;Database=eProdaja;User=sa;Password=HelloWorld123;
+            - ConnectionStrings:SqlServer=Server=vjezba-sql,1433;Database=eProdaja;User=sa;Password=HelloWorld123;
             - ASPNETCORE_ENVIRONMENT=Development
         ports:
             - 5192:5192
