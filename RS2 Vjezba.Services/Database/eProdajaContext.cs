@@ -37,7 +37,7 @@ namespace RS2_Vjezba.Services.Database
         {
             if (!optionsBuilder.IsConfigured)
             {
-                optionsBuilder.UseSqlServer("Data Source=localhost, 1434;Initial Catalog=eProdaja; user=sa; Password=QWEasd123!");
+                optionsBuilder.UseSqlServer("Data Source=localhost;Initial Catalog=eProdaja;Trusted_Connection=true;MultipleActiveResultSets=true;");
             }
         }
 
