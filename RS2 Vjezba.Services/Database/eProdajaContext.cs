@@ -33,6 +33,13 @@ namespace RS2_Vjezba.Services.Database
         public virtual DbSet<Uloge> Uloges { get; set; } = null!;
         public virtual DbSet<VrsteProizvodum> VrsteProizvoda { get; set; } = null!;
 
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            if (!optionsBuilder.IsConfigured)
+            {
+                optionsBuilder.UseSqlServer("Data Source=localhost, 1434;Initial Catalog=eProdaja; user=sa; Password=QWEasd123!");
+            }
+        }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

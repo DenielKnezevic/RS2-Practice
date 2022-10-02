@@ -7,6 +7,7 @@ using RS2_Vjezba.Services.ProductStateMachine;
 using RS2_Vjezba.Services.Services;
 using RS2_Vjezbe.Models;
 
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -67,5 +68,11 @@ app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
+
+using (var scope = app.Services.CreateScope())
+{
+    var dataContext = scope.ServiceProvider.GetRequiredService<eProdajaContext>();
+    dataContext.Database.Migrate();
+}
 
 app.Run();

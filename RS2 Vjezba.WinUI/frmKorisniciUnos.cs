@@ -45,7 +45,7 @@ namespace RS2_Vjezba.WinUI
 
         private async void btnSave_Click(object sender, EventArgs e)
         {
-           if(!ValidateChildren())
+           if(ValidateChildren())
             {
                 if (_user != null)
                 {
@@ -87,17 +87,17 @@ namespace RS2_Vjezba.WinUI
 
         private void txtIme_Validating(object sender, CancelEventArgs e)
         {
-            //if (string.IsNullOrEmpty(txtIme.Text))
-            //{
-            //    e.Cancel = true;
-            //    txtIme.Focus();
-            //    errorProvider.SetError(txtIme, "Ime ne smije ostati prazno polje");
-            //}
-            //else
-            //{
-            //    e.Cancel = false;
-            //    errorProvider.SetError(txtIme, "");
-            //}
+            if (string.IsNullOrEmpty(txtIme.Text))
+            {
+                e.Cancel = true;
+                txtIme.Focus();
+                errorProvider.SetError(txtIme, "Ime ne smije ostati prazno polje");
+            }
+            else
+            {
+                e.Cancel = false;
+                errorProvider.SetError(txtIme, "");
+            }
         }
 
         private void txtPrezime_Validating(object sender, CancelEventArgs e)
