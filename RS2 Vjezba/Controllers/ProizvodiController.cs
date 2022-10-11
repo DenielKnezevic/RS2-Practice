@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using RS2_Vjezba.Services.Database;
 using RS2_Vjezba.Services.Services;
@@ -40,6 +41,12 @@ namespace RS2_Vjezba.Controllers
         public List<string> AllowedActions(int id)
         {
             return ProizvodiService.AllowedActions(id);
+        }
+        [AllowAnonymous]
+        [HttpGet("{id}/Recommend")]
+        public List<RS2_Vjezbe.Models.Proizvodi> Recommend(int id)
+        {
+            return ProizvodiService.Recommend(id);
         }
     }
 }

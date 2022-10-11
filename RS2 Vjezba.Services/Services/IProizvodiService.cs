@@ -15,5 +15,6 @@ namespace RS2_Vjezba.Services.Services
         RS2_Vjezbe.Models.Proizvodi Hide(int id);
         void Delete(int id);
         List<string> AllowedActions(int id);
+        List<RS2_Vjezbe.Models.Proizvodi> Recommend(int id);
     }
 }
