@@ -8,6 +8,7 @@ class Product {
   int? proizvodID;
   String? naziv;
   String? slika;
+  double? cijena;
 
   Product(){}
 

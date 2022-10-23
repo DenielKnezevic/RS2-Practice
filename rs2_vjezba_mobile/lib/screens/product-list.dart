@@ -17,6 +17,7 @@ class ProductListScreen extends StatefulWidget {
 class _ProductListScreenState extends State<ProductListScreen> {
   ProductProvider? _productProvider = null;
   List<Product> data = [];
+  TextEditingController _searchController = TextEditingController();
 
   @override
   void initState() {
@@ -27,7 +28,7 @@ class _ProductListScreenState extends State<ProductListScreen> {
   }
 
   Future loadData() async {
-    var tmpData = await _productProvider?.get(null);
+    var tmpData = await _productProvider?.Get(null);
     setState(() {
       data = tmpData!;
     });
@@ -39,21 +40,77 @@ class _ProductListScreenState extends State<ProductListScreen> {
       body: SafeArea(
           child: Container(
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            _buildHeader(),
+            _buildProductSearch(),
             Container(
               height: 200,
-              child: GridView(gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 1,
-                childAspectRatio: 4/3,
-                crossAxisSpacing: 20,
-                mainAxisSpacing: 20
-              ) ,
-              scrollDirection: Axis.horizontal,
-              children: _productList(),),
+              child: GridView(
+                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 1,
+                    childAspectRatio: 4 / 3,
+                    crossAxisSpacing: 20,
+                    mainAxisSpacing: 20),
+                scrollDirection: Axis.horizontal,
+                children: _productList(),
+              ),
             )
           ],
         ),
       )),
+    );
+  }
+
+  Widget _buildHeader() {
+    return Container(
+            padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+            child: Text("Products",
+                style: TextStyle(
+                    color: Colors.grey,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 36)));
+  }
+
+  Widget _buildProductSearch() {
+    return Container(
+      child: Row(children: [
+        Expanded(
+          child: Padding(
+            padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+            child: TextField(
+              controller: _searchController,
+              onSubmitted: (value) async {
+                var tmpData = await _productProvider!.Get({"naziv": value});
+                setState(() {
+                  data = tmpData;
+                });
+              },
+              decoration: InputDecoration(
+                  prefixIcon: Icon(Icons.search),
+                  hintText: "Search",
+                  border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(10),
+                      borderSide: BorderSide(color: Colors.grey))),
+            ),
+          ),
+        ),
+        Container(
+          child: Padding(
+            padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+            child: IconButton(
+              icon: Icon(Icons.filter_list),
+              onPressed: () async {
+                var tmpData = await _productProvider!
+                    .Get({"naziv": _searchController.text});
+                setState(() {
+                  data = tmpData;
+                });
+              },
+            ),
+          ),
+        )
+      ]),
     );
   }
 
@@ -62,19 +119,22 @@ class _ProductListScreenState extends State<ProductListScreen> {
       return [Text("Loading......")];
     }
 
-    List<Widget> list = data.map((x) => 
-          Container(child: 
-          Column(
-            children: [
-              Container(
-                height: 100,
-                width: 100,
-                child: imageFromBase64String(x.slika!),
+    List<Widget> list = data
+        .map((x) => Container(
+              child: Column(
+                children: [
+                  Container(
+                    height: 100,
+                    width: 100,
+                    child: imageFromBase64String(x.slika!),
+                  ),
+                  Text(x.naziv!),
+                  Text(formatNumber(x.cijena))
+                ],
               ),
-              Text(x.naziv!)
-            ],
-          ),)
-        ).cast<Widget>().toList();
+            ))
+        .cast<Widget>()
+        .toList();
 
     return list;
   }

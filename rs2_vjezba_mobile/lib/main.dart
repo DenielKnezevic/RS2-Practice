@@ -1,28 +1,34 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:rs2_vjezba_mobile/providers/product-provider.dart';
 import 'package:rs2_vjezba_mobile/screens/product-list.dart';
 import 'package:provider/provider.dart';
+import 'package:rs2_vjezba_mobile/utils/util.dart';
 
 void main() {
-  runApp(MultiProvider(providers: [
-    ChangeNotifierProvider(create: (_) => ProductProvider())
-  ],
-  child: MaterialApp(
-    title: 'Welcome to Flutter',
-    onGenerateRoute: (settings) {
-      if (settings.name == ProductListScreen.routeName) {
-        return MaterialPageRoute(builder: ((context) => ProductListScreen()));
-      }
-    },
-    home: MyApp(),
-  )));
+  runApp(MultiProvider(
+      providers: [ChangeNotifierProvider(create: (_) => ProductProvider())],
+      child: MaterialApp(
+        title: 'Welcome to Flutter',
+        onGenerateRoute: (settings) {
+          if (settings.name == ProductListScreen.routeName) {
+            return MaterialPageRoute(
+                builder: ((context) => ProductListScreen()));
+          }
+        },
+        home: MyApp(),
+      )));
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  TextEditingController _usernameController = TextEditingController();
+  TextEditingController _passwordController = TextEditingController();
+  late ProductProvider _productProvider;
 
   @override
   Widget build(BuildContext context) {
+    _productProvider = Provider.of<ProductProvider>(context, listen: false);
+
     return Scaffold(
         appBar: AppBar(
           title: const Text('RS2 vjezba'),
@@ -81,6 +87,7 @@ class MyApp extends StatelessWidget {
                   children: [
                     Container(
                       child: TextField(
+                        controller: _usernameController,
                         decoration: InputDecoration(
                             border: InputBorder.none,
                             hintText: "Username or email",
@@ -96,6 +103,8 @@ class MyApp extends StatelessWidget {
                     ),
                     Container(
                       child: TextField(
+                        obscureText: true,
+                        controller: _passwordController,
                         decoration: InputDecoration(
                             border: InputBorder.none,
                             hintText: "Password",
@@ -118,8 +127,27 @@ class MyApp extends StatelessWidget {
                     ]),
                     borderRadius: BorderRadius.circular(10)),
                 child: InkWell(
-                  onTap: () {
-                    Navigator.pushNamed(context, ProductListScreen.routeName);
+                  onTap: () async {
+                    try {
+                      Authorization.Username = _usernameController.text;
+                      Authorization.Password = _passwordController.text;
+
+                      await _productProvider.Get(null);
+
+                      Navigator.pushNamed(context, ProductListScreen.routeName);
+                    } catch (e) {
+                      showDialog(
+                          context: context,
+                          builder: (BuildContext context) => AlertDialog(
+                                title: Text("Error"),
+                                content: Text(e.toString()),
+                                actions: [
+                                  TextButton(
+                                      onPressed: () => Navigator.pop(context),
+                                      child: Text("Ok"))
+                                ],
+                              ));
+                    }
                   },
                   child: Center(
                       child: Text(
